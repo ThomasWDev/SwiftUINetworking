@@ -9,6 +9,7 @@ import SwiftUI
 
 struct TodoListView: View {
     @ObservedObject var viewModel = TodoListViewModel()
+    @State private var isClicked: Bool = false
     
     var body: some View {
         NavigationView {
@@ -25,8 +26,18 @@ struct TodoListView: View {
                         }
                     }
                     else {
-                        List(viewModel.todos) { todo in
-                            Text(todo.title)
+                        VStack {
+                            List(viewModel.todos) { todo in
+                                Text(todo.title)
+                            }
+                            
+                            Button(isClicked ? "Done" : "Fetch more") {
+                                isClicked.toggle()
+                                
+                                for i in 9...20 {
+                                    viewModel.todos.append(Todo(id: i, title: "Task \(i)"))
+                                }
+                            }.disabled(isClicked)
                         }
                     }
                     
