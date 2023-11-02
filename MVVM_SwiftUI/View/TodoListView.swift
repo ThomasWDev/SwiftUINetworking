@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct TodoListView: View {
-    @ObservedObject var viewModel = TodoListViewModel()
+    @StateObject var viewModel = TodoListViewModel()
     @State private var isClicked: Bool = false
     
     var body: some View {
